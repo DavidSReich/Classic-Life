@@ -73,9 +73,17 @@ struct LifeView: View {
             }
             .popover(isPresented: self.$showSizes, arrowEdge: .top) {
                 ForEach(self.sizes, id: \.self) { num in
-                    Button("\(num) x \(num)") {
+                    Button(action: {
                         self.lifeViewModel.setSize(rowsCols: num)
-                        self.showSizes = false
+                         self.showSizes = false
+                    }) {
+                        HStack {
+                            if num == self.lifeViewModel.rowsCols {
+                                Image(systemName: "checkmark")
+                                    .imageScale(.small)
+                            }
+                            Text("\(num) x \(num)")
+                        }
                     }
                 }
             }
